@@ -1,8 +1,8 @@
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 const player = {
   x:100,
@@ -12,8 +12,8 @@ const player = {
   speed:7
 };
 
-let up=false;
-let down=false;
+let up = false;
+let down = false;
 
 document.addEventListener("keydown",(e)=>{
   if(e.key==="ArrowUp") up=true;
@@ -45,11 +45,11 @@ function drawPlayer(){
   ctx.beginPath();
 
   ctx.arc(
-    player.x+25,
-    player.y-15,
+    player.x + 25,
+    player.y - 15,
     20,
     0,
-    Math.PI*2
+    Math.PI * 2
   );
 
   ctx.fill();
@@ -57,16 +57,17 @@ function drawPlayer(){
 
 function update(){
 
-  if(up) player.y-=player.speed;
-  if(down) player.y+=player.speed;
+  if(up) player.y -= player.speed;
+  if(down) player.y += player.speed;
 
-  if(player.y<0) player.y=0;
+  if(player.y < 0)
+    player.y = 0;
 
-  if(player.y+player.h>canvas.height)
-    player.y=canvas.height-player.h;
+  if(player.y + player.h > canvas.height)
+    player.y = canvas.height - player.h;
 }
 
-function loop(){
+function gameLoop(){
 
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
@@ -74,7 +75,7 @@ function loop(){
 
   drawPlayer();
 
-  requestAnimationFrame(loop);
+  requestAnimationFrame(gameLoop);
 }
 
-loop();
+gameLoop();
